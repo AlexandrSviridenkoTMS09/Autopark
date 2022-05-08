@@ -3,6 +3,9 @@ package level3;
 import level1and2.Color;
 import level1and2.Vehicle;
 import level1and2.VehicleType;
+import level4.DieselEngine;
+import level4.ElectricalEngine;
+import level4.GasolineEngine;
 
 public class TechnicalSpecialist {
     public static final int LOWER_LIMIT_MANUFACTURE_YEAR = 1886;
@@ -92,5 +95,27 @@ public class TechnicalSpecialist {
         else{
             return false;
         }
+    }
+    public static boolean validateGasolineEngine(GasolineEngine engine) {
+        if (engine == null) {
+            return false;
+        }
+        return engine.getEngineCapacity() > 0 && engine.getFuelTankCapacity() > 0 && engine.getFuelConsuptionPer100() > 0;
+    }
+
+    public static boolean validateDieselEngine(DieselEngine engine) {
+        if (engine == null) {
+            return false;
+        }
+
+        return engine.getEngineCapacity() > 0 && engine.getFuelTankCapacity() > 0 && engine.getFuelConsuptionPer100() > 0;
+    }
+
+    public static boolean validateElectricalEngine(ElectricalEngine engine) {
+        if (engine == null) {
+            return false;
+        }
+
+        return engine.getBatterySize() > 0 && engine.getElectricityConsumption() > 0;
     }
 }
