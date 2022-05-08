@@ -1,48 +1,51 @@
 package level1and2;
 
 public class Main2 {
+
     public static final int SIZE_VEHICLES = 7;
 
     public static void main(String[] args) {
-        Vehicle[] vehicle = initVehicle();
-        VehicleType[] as = initVehicleType();
-        Unsorted();
-        Sorted();
-        MaxMinAndEqual();
+        printlnVehicleType print = new printlnVehicleType();
+        print.printlnVehicleType(initVehicleType());
+        printlnGetStringVehicleType printString = new printlnGetStringVehicleType();
+        printString.printlnGetStringVehicleType(initVehicleType());
+        changeTaxCoefficient(initVehicleType());
+        printlnMaxTax printMaxTax = new printlnMaxTax();
+        printMaxTax.printlnMaxTax(initVehicleType());
+        printlnUnsortedVehicleType printUnsorted = new printlnUnsortedVehicleType();
+        printUnsorted.printUnsortedVehicleType(initVehicle());
+        printlnSortedVehicleType printSorted = new printlnSortedVehicleType();
+        printSorted.printlnSortedVehicleType(initVehicle());
+        printlnMaxAndMinMileage printMinAndMax = new printlnMaxAndMinMileage();
+        printMinAndMax.printlnMaxAndMinMileage(initVehicle());
+        printlnEqualVehicleType printEqual = new printlnEqualVehicleType();
+        printEqual.printlnEqualVehicleType(initVehicle());
     }
 
-    public static void MaxMinAndEqual() {
-        Vehicle[] vehicle = initVehicle();
-        System.out.println("\nMax mileage car: ");
-        System.out.println(findMaxMileageVehicle(vehicle));
-
-        System.out.println("\nMin mileage car: ");
-        System.out.println(findMinMileageVehicle(vehicle));
-
-        System.out.println("\nThe following vehicles are equal:");
-        displayEqual(vehicle);
-    }
-
-    public static void Unsorted() {
-        Vehicle[] vehicle = initVehicle();
-        System.out.println("Unsorted vehicles: ");
-        Helper.displayArr(vehicle);
-    }
-
-    public static void Sorted() {
-        Vehicle[] vehicle = initVehicle();
-        for (int i = 0; i < SIZE_VEHICLES; i++) {
-            for (int j = 0; j < SIZE_VEHICLES - 1; j++) {
-                if (vehicle[j].compareTo(vehicle[j + 1]) > 0) {
-
-                    Vehicle temp = vehicle[j + 1];
-                    vehicle[j + 1] = vehicle[j];
-                    vehicle[j] = temp;
-                }
+    public static void changeTaxCoefficient(VehicleType[] as) {
+        for (VehicleType a : as) {
+            if (a.typeName.equals("Tractor")) {
+                a.taxCoefficient = 1.3;
             }
         }
-        System.out.println("\nSorted vehicles: ");
-        Helper.displayArr(vehicle);
+    }
+
+    public static double calculationMaxTax(VehicleType[] as) {
+        double maxTax = 0;
+        for (VehicleType a : as) {
+            if (a.taxCoefficient > maxTax)
+                maxTax = a.taxCoefficient;
+        }
+        return maxTax;
+    }
+
+    public static double calculationAverage(VehicleType[] as) {
+        double sumTax = 0;
+        for (VehicleType a : as) {
+            sumTax = sumTax + a.taxCoefficient;
+        }
+        double average = sumTax / 4;
+        return average;
     }
 
     public static VehicleType[] initVehicleType() {
@@ -78,14 +81,10 @@ public class Main2 {
     public static Vehicle findMinMileageVehicle(Vehicle[] vehicles) {
         int minMileage;
         Vehicle minMileageVehicle;
-
         minMileageVehicle = vehicles[0];
         minMileage = vehicles[0].getMileage();
-
         for (int i = 0; i < SIZE_VEHICLES; i++) {
-
             int mileage = vehicles[i].getMileage();
-
             if (mileage < minMileage) {
                 minMileage = mileage;
                 minMileageVehicle = vehicles[i];
@@ -98,43 +97,32 @@ public class Main2 {
     public static Vehicle findMaxMileageVehicle(Vehicle[] vehicles) {
         int maxMileage;
         Vehicle maxMileageVehicle;
-
         maxMileageVehicle = vehicles[0];
         maxMileage = vehicles[0].getMileage();
-
         for (int i = 0; i < SIZE_VEHICLES; i++) {
-
             int mileage = vehicles[i].getMileage();
-
             if (mileage > maxMileage) {
                 maxMileage = mileage;
                 maxMileageVehicle = vehicles[i];
             }
         }
-
         return maxMileageVehicle;
     }
 
-
     public static void displayEqual(Vehicle[] vehicles) {
         int counter = 0;
-
         for (int i = 0; i < SIZE_VEHICLES; i++) {
-
             for (int j = i + 1; j < SIZE_VEHICLES; j++) {
-
                 if (vehicles[i].equals(vehicles[j])) {
                     counter++;
                     System.out.println(vehicles[i] + " and " + vehicles[j]);
                 }
             }
         }
-
         if (counter == 0) {
             System.out.println("Neither of vehicles are equal");
         }
     }
-
 
     public static class Helper {
         public static <T> void displayArr(T[] elements) {
