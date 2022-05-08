@@ -4,27 +4,46 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Objects;
 
+import static level3.TechnicalSpecialist.*;
+
 public class Vehicle {
-    VehicleType type;
-    String modelName;
-    String registrationNumber;
-    int weight;
-    int manufactureYear;
-    int mileage;
-    Color color;
-    int volumeTank;
+    private VehicleType type;
+    private String modelName;
+    private String registrationNumber;
+    private int weight;
+    private int manufactureYear;
+    private int mileage;
+    private Color color;
+    private int volumeTank;
 
     public Vehicle(VehicleType type, String modelName, String registrationNumber, int weight, int manufactureYear,
                    int mileage, Color color, int volumeTank) {
-        this.type = type;
-        this.modelName = modelName;
+        if(validateVehicleType(type)){
+            this.type = null;
+        }
+        else{
+            this.type = type;
+        }
+        if(validateModelName(modelName)){
+            this.modelName = null;
+        }
+        else{
+            this.modelName = modelName;
+        }
         this.registrationNumber = registrationNumber;
         this.weight = weight;
-        this.manufactureYear = manufactureYear;
+        if(!validateManufactureYear(manufactureYear)){
+            this.manufactureYear = 0;
+        }
+        else{
+            this.manufactureYear = manufactureYear;
+        }
         this.mileage = mileage;
         this.color = color;
         this.volumeTank = volumeTank;
     }
+
+
 
     public Vehicle() {
     }
@@ -33,16 +52,8 @@ public class Vehicle {
         return type;
     }
 
-    public void setType(VehicleType type) {
-        this.type = type;
-    }
-
     public String getModelName() {
         return modelName;
-    }
-
-    public void setModelName(String modelName) {
-        this.modelName = modelName;
     }
 
     public String getRegistrationNumber() {
@@ -50,7 +61,9 @@ public class Vehicle {
     }
 
     public void setRegistrationNumber(String registrationNumber) {
-        this.registrationNumber = registrationNumber;
+        if (validateRegistrationNumber(registrationNumber)) {
+            this.registrationNumber = registrationNumber;
+        }
     }
 
     public int getWeight() {
@@ -58,15 +71,13 @@ public class Vehicle {
     }
 
     public void setWeight(int weight) {
-        this.weight = weight;
+        if (validateWeight(weight)) {
+            this.weight = weight;
+        }
     }
 
     public int getManufactureYear() {
         return manufactureYear;
-    }
-
-    public void setManufactureYear(int manufactureYear) {
-        this.manufactureYear = manufactureYear;
     }
 
     public int getMileage() {
@@ -74,7 +85,9 @@ public class Vehicle {
     }
 
     public void setMileage(int mileage) {
-        this.mileage = mileage;
+        if (validateMileage(mileage)) {
+            this.mileage = mileage;
+        }
     }
 
     public Color getColor() {
@@ -82,7 +95,9 @@ public class Vehicle {
     }
 
     public void setColor(Color color) {
-        this.color = color;
+        if (validateColor(color)) {
+            this.color = color;
+        }
     }
 
     public int getVolumeTank() {
