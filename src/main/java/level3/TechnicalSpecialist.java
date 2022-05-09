@@ -11,8 +11,7 @@ public class TechnicalSpecialist {
     public static final int LOWER_LIMIT_MANUFACTURE_YEAR = 1886;
 
     static public boolean validateManufactureYear(int manufactureYear){
-        Vehicle vehicle = new Vehicle();
-        if(vehicle.getManufactureYear()>=LOWER_LIMIT_MANUFACTURE_YEAR && (vehicle.getManufactureYear()-1000 >=0 && vehicle.getManufactureYear()-9999 <= 0)){
+        if(manufactureYear>=LOWER_LIMIT_MANUFACTURE_YEAR && (manufactureYear-1000 >=0 && manufactureYear-9999 <= 0)){
             return true;
         }
         else{
@@ -20,8 +19,7 @@ public class TechnicalSpecialist {
         }
     }
     static public boolean validateMileage(int mileage){
-        Vehicle vehicle = new Vehicle();
-        if(vehicle.getMileage() >= 0){
+        if(mileage >= 0){
             return true;
         }
         else{
@@ -29,8 +27,8 @@ public class TechnicalSpecialist {
         }
     }
     static public boolean validateWeight(int weight){
-        Vehicle vehicle = new Vehicle();
-        if(vehicle.getWeight() >= 0){
+
+        if(weight >= 0){
             return true;
         }
         else{

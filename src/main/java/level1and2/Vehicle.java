@@ -1,6 +1,7 @@
 package level1and2;
 
 import level4.Startable;
+import level5.NotVehicleException;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -21,28 +22,30 @@ public class Vehicle {
 
     public Vehicle(VehicleType type, String modelName, String registrationNumber, int weight, int manufactureYear,
                    int mileage, Color color, int volumeTank, Startable engine) {
-        if(validateVehicleType(type)){
-            this.type = null;
+        try {
+            if (validateVehicleType(type)) {
+                throw new NotVehicleException("Vehicle type: " + type);
+            }
+                this.type = type;
+
+            if (validateModelName(modelName)) {
+                throw new NotVehicleException("Model name: " + modelName);
+            } else {
+                this.modelName = modelName;
+            }
+            this.registrationNumber = registrationNumber;
+            this.weight = weight;
+            if (!validateManufactureYear(manufactureYear)) {
+                throw new NotVehicleException("Manufacture year: " + manufactureYear);
+            } else {
+                this.manufactureYear = manufactureYear;
+            }
+            this.mileage = mileage;
+            this.color = color;
         }
-        else{
-            this.type = type;
+        catch (NotVehicleException e){
+            System.err.println(e.getMessage());
         }
-        if(validateModelName(modelName)){
-            this.modelName = null;
-        }
-        else{
-            this.modelName = modelName;
-        }
-        this.registrationNumber = registrationNumber;
-        this.weight = weight;
-        if(!validateManufactureYear(manufactureYear)){
-            this.manufactureYear = 0;
-        }
-        else{
-            this.manufactureYear = manufactureYear;
-        }
-        this.mileage = mileage;
-        this.color = color;
         this.volumeTank = volumeTank;
         this.engine = engine;
     }
