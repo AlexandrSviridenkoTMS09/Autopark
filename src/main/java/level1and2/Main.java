@@ -5,21 +5,16 @@ public class Main {
     public static final int SIZE_VEHICLES = 7;
 
     public static void main(String[] args) {
-        printlnVehicleType print = new printlnVehicleType();
+        PrintResultVehicleAndVehicleType print = new PrintResultVehicleAndVehicleType();
         print.printlnVehicleType(initVehicleType());
-        printlnGetStringVehicleType printString = new printlnGetStringVehicleType();
-        printString.printlnGetStringVehicleType(initVehicleType());
+        print.printlnGetStringVehicleType(initVehicleType());
         changeTaxCoefficient(initVehicleType());
-        printlnMaxTax printMaxTax = new printlnMaxTax();
-        printMaxTax.printlnMaxTax(initVehicleType());
-        printlnUnsortedVehicleType printUnsorted = new printlnUnsortedVehicleType();
-        printUnsorted.printUnsortedVehicleType(initVehicle());
-        printlnSortedVehicleType printSorted = new printlnSortedVehicleType();
-        printSorted.printlnSortedVehicleType(initVehicle());
-        printlnMaxAndMinMileage printMinAndMax = new printlnMaxAndMinMileage();
-        printMinAndMax.printlnMaxAndMinMileage(initVehicle());
-        printlnEqualVehicleType printEqual = new printlnEqualVehicleType();
-        printEqual.printlnEqualVehicleType(initVehicle());
+        print.printlnMaxTax(initVehicleType());
+        print.printUnsortedVehicleType(initVehicle());
+        print.printlnSortedVehicleType(initVehicle());
+        print.printlnMaxAndMinMileage(initVehicle());
+        print.printlnEqualVehicleType(initVehicle());
+
     }
 
     public static void changeTaxCoefficient(VehicleType[] as) {
