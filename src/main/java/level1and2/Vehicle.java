@@ -1,11 +1,9 @@
 package level1and2;
 
 import Engine.Startable;
-
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Objects;
-
 import static level1and2.TechnicalSpecialist.*;
 
 public class Vehicle {
@@ -21,57 +19,47 @@ public class Vehicle {
 
     public Vehicle(VehicleType type, String modelName, String registrationNumber, int weight, int manufactureYear,
                    int mileage, Color color, int volumeTank, Startable engine) {
-        if (!validateVehicleType(type)) {
-            this.type = null;
-        } else {
-            this.type = type;
-        }
-        if (!validateModelName(modelName)) {
-            this.modelName = null;
-        } else {
-            this.modelName = modelName;
-        }
-        if (!validateRegistrationNumber(registrationNumber)) {
-            this.registrationNumber = null;
-        } else {
+        try {
+            if (!validateVehicleType(type)) {
+                throw new NotVehicleException("Vehicle type: " + type);
+            }
+                this.type = type;
+
+            if (!validateModelName(modelName)) {
+                throw new NotVehicleException("Model name: " + modelName);
+            }
+                this.modelName = modelName;
+
+            if (!validateRegistrationNumber(registrationNumber)) {
+                throw new NotVehicleException("Registration number:" + registrationNumber);
+            }
             this.registrationNumber = registrationNumber;
-        }
 
-        if (validateWeight(weight)) {
-            if (validateWeight(weight)) {
-                this.weight = weight;
-            } else {
-                this.weight = 0;
+            if (!validateWeight(weight)) {
+                throw new NotVehicleException("Weight: " + weight);
             }
-        }
-        if (validateManufactureYear(manufactureYear)) {
-            if (validateManufactureYear(manufactureYear)) {
-                this.manufactureYear = manufactureYear;
-            } else {
-                this.manufactureYear = 0;
-            }
-        }
+            this.weight = weight;
 
-        if (validateMileage(mileage)) {
-            if (validateMileage(mileage)) {
-                this.mileage = mileage;
-            } else {
-                this.mileage = 0;
+            if (!validateManufactureYear(manufactureYear)) {
+                throw new NotVehicleException("Manufacture year: " + manufactureYear);
             }
+            this.manufactureYear = manufactureYear;
+
+            if(!validateMileage(mileage)){
+                throw new NotVehicleException("Mileage: " + mileage);
+            }
+            this.mileage = mileage;
+
+            if (!validateColor(color)) {
+                throw new NotVehicleException("Color: " + color);
+            }
+            this.color = color;
         }
-        if (validateColor(color)) {
-            if (validateColor(color)) {
-                this.color = color;
-            } else {
-                this.color = null;
-            }
+        catch (NotVehicleException e){
+            System.err.println(e.getMessage());
         }
         this.volumeTank = volumeTank;
         this.engine = engine;
-    }
-
-
-    public Vehicle() {
     }
 
     public Startable getEngine() {
@@ -80,6 +68,9 @@ public class Vehicle {
 
     public void setEngine(Startable engine) {
         this.engine = engine;
+    }
+
+    public Vehicle() {
     }
 
     public VehicleType getType() {
@@ -95,7 +86,9 @@ public class Vehicle {
     }
 
     public void setRegistrationNumber(String registrationNumber) {
-        this.registrationNumber = registrationNumber;
+        if (validateRegistrationNumber(registrationNumber)) {
+            this.registrationNumber = registrationNumber;
+        }
     }
 
     public int getWeight() {
@@ -103,15 +96,13 @@ public class Vehicle {
     }
 
     public void setWeight(int weight) {
-        this.weight = weight;
+        if (validateWeight(weight)) {
+            this.weight = weight;
+        }
     }
 
     public int getManufactureYear() {
         return manufactureYear;
-    }
-
-    public void setManufactureYear(int manufactureYear) {
-        this.manufactureYear = manufactureYear;
     }
 
     public int getMileage() {
@@ -119,7 +110,9 @@ public class Vehicle {
     }
 
     public void setMileage(int mileage) {
-        this.mileage = mileage;
+        if (validateMileage(mileage)) {
+            this.mileage = mileage;
+        }
     }
 
     public Color getColor() {
@@ -127,7 +120,9 @@ public class Vehicle {
     }
 
     public void setColor(Color color) {
-        this.color = color;
+        if (validateColor(color)) {
+            this.color = color;
+        }
     }
 
     public int getVolumeTank() {
@@ -151,6 +146,9 @@ public class Vehicle {
 
     }
 
+    public void display() {
+        System.out.println(this);
+    }
 
     public int compareTo(Vehicle obj) {
         if (manufactureYear > obj.manufactureYear) {
