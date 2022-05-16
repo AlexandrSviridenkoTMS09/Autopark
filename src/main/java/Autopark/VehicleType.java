@@ -1,4 +1,4 @@
-package level1and2;
+package Autopark;
 
 public class VehicleType {
 
@@ -27,10 +27,6 @@ public class VehicleType {
 
     public void setTax(double taxCoefficient) {
         this.taxCoefficient = taxCoefficient;
-    }
-
-    public void display() {
-        System.out.println(this);
     }
 
     @Override

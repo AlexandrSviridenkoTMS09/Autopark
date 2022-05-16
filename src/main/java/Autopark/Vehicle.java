@@ -1,10 +1,10 @@
-package level1and2;
+package Autopark;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Objects;
 
-import static level3.TechnicalSpecialist.*;
+import static Autopark.TechnicalSpecialist.*;
 
 public class Vehicle {
     private VehicleType type;
@@ -18,31 +18,53 @@ public class Vehicle {
 
     public Vehicle(VehicleType type, String modelName, String registrationNumber, int weight, int manufactureYear,
                    int mileage, Color color, int volumeTank) {
-        if(validateVehicleType(type)){
+        if (!validateVehicleType(type)) {
             this.type = null;
-        }
-        else{
+        } else {
             this.type = type;
         }
-        if(validateModelName(modelName)){
+        if (!validateModelName(modelName)) {
             this.modelName = null;
-        }
-        else{
+        } else {
             this.modelName = modelName;
         }
-        this.registrationNumber = registrationNumber;
-        this.weight = weight;
-        if(!validateManufactureYear(manufactureYear)){
-            this.manufactureYear = 0;
+        if (!validateRegistrationNumber(registrationNumber)) {
+            this.registrationNumber = null;
+        } else {
+            this.registrationNumber = registrationNumber;
         }
-        else{
-            this.manufactureYear = manufactureYear;
+
+        if (validateWeight(weight)) {
+            if (validateWeight(weight)) {
+                this.weight = weight;
+            } else {
+                this.weight = 0;
+            }
         }
-        this.mileage = mileage;
-        this.color = color;
+        if (validateManufactureYear(manufactureYear)) {
+            if (validateManufactureYear(manufactureYear)) {
+                this.manufactureYear = manufactureYear;
+            } else {
+                this.manufactureYear = 0;
+            }
+        }
+
+        if (validateMileage(mileage)) {
+            if (validateMileage(mileage)) {
+                this.mileage = mileage;
+            } else {
+                this.mileage = 0;
+            }
+        }
+        if (validateColor(color)) {
+            if (validateColor(color)) {
+                this.color = color;
+            } else {
+                this.color = null;
+            }
+        }
         this.volumeTank = volumeTank;
     }
-
 
 
     public Vehicle() {
@@ -61,9 +83,7 @@ public class Vehicle {
     }
 
     public void setRegistrationNumber(String registrationNumber) {
-        if (validateRegistrationNumber(registrationNumber)) {
-            this.registrationNumber = registrationNumber;
-        }
+        this.registrationNumber = registrationNumber;
     }
 
     public int getWeight() {
@@ -71,13 +91,15 @@ public class Vehicle {
     }
 
     public void setWeight(int weight) {
-        if (validateWeight(weight)) {
-            this.weight = weight;
-        }
+        this.weight = weight;
     }
 
     public int getManufactureYear() {
         return manufactureYear;
+    }
+
+    public void setManufactureYear(int manufactureYear) {
+        this.manufactureYear = manufactureYear;
     }
 
     public int getMileage() {
@@ -85,9 +107,7 @@ public class Vehicle {
     }
 
     public void setMileage(int mileage) {
-        if (validateMileage(mileage)) {
-            this.mileage = mileage;
-        }
+        this.mileage = mileage;
     }
 
     public Color getColor() {
@@ -95,9 +115,7 @@ public class Vehicle {
     }
 
     public void setColor(Color color) {
-        if (validateColor(color)) {
-            this.color = color;
-        }
+        this.color = color;
     }
 
     public int getVolumeTank() {
@@ -119,10 +137,6 @@ public class Vehicle {
         return type + "," + modelName + "," + registrationNumber + "," + weight + "," + manufactureYear + ","
                 + mileage + "," + color + "," + volumeTank + "," + getCalcTaxPerMonth();
 
-    }
-
-    public void display() {
-        System.out.println(this);
     }
 
     public int compareTo(Vehicle obj) {
