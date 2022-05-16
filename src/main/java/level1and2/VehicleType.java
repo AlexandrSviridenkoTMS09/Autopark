@@ -29,10 +29,6 @@ public class VehicleType {
         this.taxCoefficient = taxCoefficient;
     }
 
-    public void display() {
-        System.out.println(this);
-    }
-
     @Override
     public String toString() {
         return typeName + "," + taxCoefficient;
