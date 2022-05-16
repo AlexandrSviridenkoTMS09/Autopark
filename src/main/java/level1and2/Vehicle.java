@@ -106,10 +106,6 @@ public class Vehicle {
 
     }
 
-    public void display() {
-        System.out.println(this);
-    }
-
     public int compareTo(Vehicle obj) {
         if (manufactureYear > obj.manufactureYear) {
             return 1;

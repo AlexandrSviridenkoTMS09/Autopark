@@ -5,8 +5,7 @@ public class Main {
     public static final int SIZE_VEHICLES = 7;
 
     public static void main(String[] args) {
-        PrintResultVehicleAndVehicleType print = new PrintResultVehicleAndVehicleType();
-        print.printlnVehicleType(initVehicleType());
+        VehicleInfoPrinter print = new VehicleInfoPrinter();
         print.printlnGetStringVehicleType(initVehicleType());
         changeTaxCoefficient(initVehicleType());
         print.printlnMaxTax(initVehicleType());
@@ -102,21 +101,6 @@ public class Main {
             }
         }
         return maxMileageVehicle;
-    }
-
-    public static void displayEqual(Vehicle[] vehicles) {
-        int counter = 0;
-        for (int i = 0; i < SIZE_VEHICLES; i++) {
-            for (int j = i + 1; j < SIZE_VEHICLES; j++) {
-                if (vehicles[i].equals(vehicles[j])) {
-                    counter++;
-                    System.out.println(vehicles[i] + " and " + vehicles[j]);
-                }
-            }
-        }
-        if (counter == 0) {
-            System.out.println("Neither of vehicles are equal.");
-        }
     }
 
     public static class Helper {

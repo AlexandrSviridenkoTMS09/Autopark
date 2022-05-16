@@ -2,7 +2,7 @@ package level1and2;
 
 import static level1and2.Main.*;
 
-public class PrintResultVehicleAndVehicleType {
+public class VehicleInfoPrinter {
     public static final int SIZE_VEHICLES = 7;
 
     public static void printlnEqualVehicleType(Vehicle[] vehicle){
@@ -48,10 +48,18 @@ public class PrintResultVehicleAndVehicleType {
         Main.Helper.displayArr(vehicle);
     }
 
-    public static void printlnVehicleType(VehicleType[] as) {
-        for (VehicleType a : as
-        ) {
-            a.display();
+    public static void displayEqual(Vehicle[] vehicles) {
+        int counter = 0;
+        for (int i = 0; i < SIZE_VEHICLES; i++) {
+            for (int j = i + 1; j < SIZE_VEHICLES; j++) {
+                if (vehicles[i].equals(vehicles[j])) {
+                    counter++;
+                    System.out.println(vehicles[i] + " and " + vehicles[j]);
+                }
+            }
+        }
+        if (counter == 0) {
+            System.out.println("Neither of vehicles are equal.");
         }
     }
 }
