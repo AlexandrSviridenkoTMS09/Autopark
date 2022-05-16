@@ -1,6 +1,6 @@
-package Autopark;
+package level1and2;
 
-import static Autopark.Main.*;
+import static level1and2.Main.*;
 
 public class VehicleInfoPrinter {
     public static final int SIZE_VEHICLES = 7;

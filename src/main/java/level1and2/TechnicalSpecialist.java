@@ -1,8 +1,4 @@
-package Autopark;
-
-import Autopark.Color;
-import Autopark.Vehicle;
-import Autopark.VehicleType;
+package level1and2;
 
 public class TechnicalSpecialist {
     public static final int LOWER_LIMIT_MANUFACTURE_YEAR = 1886;
