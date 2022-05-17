@@ -1,4 +1,4 @@
-package level1and2;
+package com.Autopark;
 
 public class TechnicalSpecialist {
     public static final int LOWER_LIMIT_MANUFACTURE_YEAR = 1886;

@@ -1,10 +1,10 @@
-package level1and2;
+package com.Autopark;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Objects;
 
-import static level1and2.TechnicalSpecialist.*;
+import static com.Autopark.TechnicalSpecialist.*;
 
 public class Vehicle {
     private VehicleType type;
