@@ -1,6 +1,4 @@
-package level1and2;
-
-import static level1and2.Main.*;
+package com.Autopark;
 
 public class VehicleInfoPrinter {
     public static final int SIZE_VEHICLES = 7;
@@ -19,14 +17,14 @@ public class VehicleInfoPrinter {
 
     public static void printlnMaxAndMinMileage(Vehicle[] vehicle){
         System.out.println("\nMax mileage car: ");
-        System.out.println(findMaxMileageVehicle(vehicle));
+        System.out.println(Main.findMaxMileageVehicle(vehicle));
 
         System.out.println("\nMin mileage car: ");
-        System.out.println(findMinMileageVehicle(vehicle));
+        System.out.println(Main.findMinMileageVehicle(vehicle));
     }
 
     public static void printlnMaxTax(VehicleType[] vehicleTypes){
-        System.out.println("maxTax = " + calculationMaxTax(vehicleTypes) + "\n" + "average = " + calculationAverage(vehicleTypes));
+        System.out.println("maxTax = " + Main.calculationMaxTax(vehicleTypes) + "\n" + "average = " + Main.calculationAverage(vehicleTypes));
     }
 
     public static void printlnSortedVehicleType(Vehicle[] vehicle) {

@@ -1,4 +1,4 @@
-package level1and2;
+package com.Autopark;
 
 public class VehicleType {
 

@@ -1,30 +1,71 @@
-package level1and2;
+package com.Autopark;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Objects;
 
+import static com.Autopark.TechnicalSpecialist.*;
+
 public class Vehicle {
-    VehicleType type;
-    String modelName;
-    String registrationNumber;
-    int weight;
-    int manufactureYear;
-    int mileage;
-    Color color;
-    int volumeTank;
+    private VehicleType type;
+    private String modelName;
+    private String registrationNumber;
+    private int weight;
+    private int manufactureYear;
+    private int mileage;
+    private Color color;
+    private int volumeTank;
 
     public Vehicle(VehicleType type, String modelName, String registrationNumber, int weight, int manufactureYear,
                    int mileage, Color color, int volumeTank) {
-        this.type = type;
-        this.modelName = modelName;
-        this.registrationNumber = registrationNumber;
-        this.weight = weight;
-        this.manufactureYear = manufactureYear;
-        this.mileage = mileage;
-        this.color = color;
+        if (!validateVehicleType(type)) {
+            this.type = null;
+        } else {
+            this.type = type;
+        }
+        if (!validateModelName(modelName)) {
+            this.modelName = null;
+        } else {
+            this.modelName = modelName;
+        }
+        if (!validateRegistrationNumber(registrationNumber)) {
+            this.registrationNumber = null;
+        } else {
+            this.registrationNumber = registrationNumber;
+        }
+
+        if (validateWeight(weight)) {
+            if (validateWeight(weight)) {
+                this.weight = weight;
+            } else {
+                this.weight = 0;
+            }
+        }
+        if (validateManufactureYear(manufactureYear)) {
+            if (validateManufactureYear(manufactureYear)) {
+                this.manufactureYear = manufactureYear;
+            } else {
+                this.manufactureYear = 0;
+            }
+        }
+
+        if (validateMileage(mileage)) {
+            if (validateMileage(mileage)) {
+                this.mileage = mileage;
+            } else {
+                this.mileage = 0;
+            }
+        }
+        if (validateColor(color)) {
+            if (validateColor(color)) {
+                this.color = color;
+            } else {
+                this.color = null;
+            }
+        }
         this.volumeTank = volumeTank;
     }
+
 
     public Vehicle() {
     }
@@ -33,16 +74,8 @@ public class Vehicle {
         return type;
     }
 
-    public void setType(VehicleType type) {
-        this.type = type;
-    }
-
     public String getModelName() {
         return modelName;
-    }
-
-    public void setModelName(String modelName) {
-        this.modelName = modelName;
     }
 
     public String getRegistrationNumber() {
