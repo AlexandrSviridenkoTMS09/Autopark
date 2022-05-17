@@ -1,4 +1,4 @@
-package Engine;
+package com.Autopark.Engine;
 
 public class GasolineEngine extends CombustionEngine {
     public GasolineEngine(double engineCapacity, double fuelTankCapacity, double fuelConsuptionPer100) {

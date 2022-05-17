@@ -1,4 +1,4 @@
-package Engine;
+package com.Autopark.Engine;
 
 public class DieselEngine extends CombustionEngine{
     public DieselEngine(double engineCapacity, double fuelTankCapacity, double fuelConsuptionPer100) {

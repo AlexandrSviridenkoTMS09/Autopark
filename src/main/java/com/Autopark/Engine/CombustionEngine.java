@@ -1,4 +1,4 @@
-package Engine;
+package com.Autopark.Engine;
 
 public class CombustionEngine extends AbstractEngine {
     double engineCapacity;

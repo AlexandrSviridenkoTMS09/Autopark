@@ -1,4 +1,4 @@
-package Engine;
+package com.Autopark.Engine;
 
 public class ElectricalEngine extends  AbstractEngine{
     private double batterySize;

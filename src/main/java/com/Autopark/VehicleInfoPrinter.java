@@ -3,7 +3,7 @@ package com.Autopark;
 public class VehicleInfoPrinter {
     public static final int SIZE_VEHICLES = 7;
 
-    public static void printlnEqualVehicleType(Vehicle[] vehicle){
+    public static void printlnEqualVehicleType(Vehicle[] vehicle) {
         System.out.println("\nThe following vehicles are equal:");
         displayEqual(vehicle);
     }
@@ -15,7 +15,7 @@ public class VehicleInfoPrinter {
         }
     }
 
-    public static void printlnMaxAndMinMileage(Vehicle[] vehicle){
+    public static void printlnMaxAndMinMileage(Vehicle[] vehicle) {
         System.out.println("\nMax mileage car: ");
         System.out.println(Main.findMaxMileageVehicle(vehicle));
 
@@ -23,7 +23,7 @@ public class VehicleInfoPrinter {
         System.out.println(Main.findMinMileageVehicle(vehicle));
     }
 
-    public static void printlnMaxTax(VehicleType[] vehicleTypes){
+    public static void printlnMaxTax(VehicleType[] vehicleTypes) {
         System.out.println("maxTax = " + Main.calculationMaxTax(vehicleTypes) + "\n" + "average = " + Main.calculationAverage(vehicleTypes));
     }
 
@@ -39,7 +39,8 @@ public class VehicleInfoPrinter {
             }
         }
         System.out.println("\nSorted vehicles: ");
-        Main.Helper.displayArr(vehicle);}
+        Main.Helper.displayArr(vehicle);
+    }
 
     public static void printUnsortedVehicleType(Vehicle[] vehicle) {
         System.out.println("Unsorted vehicles: ");
@@ -60,5 +61,7 @@ public class VehicleInfoPrinter {
             System.out.println("Neither of vehicles are equal.");
         }
     }
+    public static void printAutoMaxKilometrs(Vehicle[] vehicles){
+        Main.autoMaxKilometrs(vehicles);
+    }
 }
-

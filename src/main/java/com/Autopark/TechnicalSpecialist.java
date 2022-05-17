@@ -1,5 +1,9 @@
 package com.Autopark;
 
+import com.Autopark.Engine.DieselEngine;
+import com.Autopark.Engine.ElectricalEngine;
+import com.Autopark.Engine.GasolineEngine;
+
 public class TechnicalSpecialist {
     public static final int LOWER_LIMIT_MANUFACTURE_YEAR = 1886;
 
@@ -90,4 +94,27 @@ public class TechnicalSpecialist {
     static public boolean validateModelName(String name) {
         return name != null && !name.equals("");
     }
+    public static boolean validateGasolineEngine(GasolineEngine engine) {
+        if (engine == null) {
+            return false;
+        }
+        return engine.getEngineCapacity() > 0 && engine.getFuelTankCapacity() > 0 && engine.getFuelConsuptionPer100() > 0;
+    }
+
+    public static boolean validateDieselEngine(DieselEngine engine) {
+        if (engine == null) {
+            return false;
+        }
+
+        return engine.getEngineCapacity() > 0 && engine.getFuelTankCapacity() > 0 && engine.getFuelConsuptionPer100() > 0;
+    }
+
+    public static boolean validateElectricalEngine(ElectricalEngine engine) {
+        if (engine == null) {
+            return false;
+        }
+
+        return engine.getBatterySize() > 0 && engine.getElectricityConsumption() > 0;
+    }
 }
+

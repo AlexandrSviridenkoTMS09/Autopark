@@ -1,5 +1,7 @@
 package com.Autopark;
 
+import com.Autopark.Engine.Startable;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Objects;
@@ -15,9 +17,10 @@ public class Vehicle {
     private int mileage;
     private Color color;
     private int volumeTank;
+    private Startable engine;
 
     public Vehicle(VehicleType type, String modelName, String registrationNumber, int weight, int manufactureYear,
-                   int mileage, Color color, int volumeTank) {
+                   int mileage, Color color, int volumeTank, Startable engine) {
         if (!validateVehicleType(type)) {
             this.type = null;
         } else {
@@ -64,10 +67,19 @@ public class Vehicle {
             }
         }
         this.volumeTank = volumeTank;
+        this.engine = engine;
     }
 
 
     public Vehicle() {
+    }
+
+    public Startable getEngine() {
+        return engine;
+    }
+
+    public void setEngine(Startable engine) {
+        this.engine = engine;
     }
 
     public VehicleType getType() {
@@ -128,7 +140,7 @@ public class Vehicle {
 
     public double getCalcTaxPerMonth() {
         VehicleType vehicleType = new VehicleType();
-        double GetCalcTaxPerMonth = getWeight() * 0.0013 + vehicleType.taxCoefficient * 30 + 5;
+        double GetCalcTaxPerMonth = getWeight() * 0.0013 + vehicleType.taxCoefficient * engine.getTaxPerMonth() * 30 + 5;
         return new BigDecimal(GetCalcTaxPerMonth).setScale(2, RoundingMode.HALF_EVEN).doubleValue();
     }
 
@@ -138,6 +150,7 @@ public class Vehicle {
                 + mileage + "," + color + "," + volumeTank + "," + getCalcTaxPerMonth();
 
     }
+
 
     public int compareTo(Vehicle obj) {
         if (manufactureYear > obj.manufactureYear) {
