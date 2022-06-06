@@ -4,23 +4,23 @@ import javax.xml.crypto.Data;
 import java.util.Date;
 
 public class Rent {
-    Date data;
+    Date date;
     double rent;
 
     public Rent() {
     }
 
-    public Rent(Date data, double rent) {
-        this.data = data;
+    public Rent(Date date, double rent) {
+        this.date = date;
         this.rent = rent;
     }
 
     public Date getData() {
-        return data;
+        return date;
     }
 
-    public void setData(Date data) {
-        this.data = data;
+    public void setData(Date date) {
+        this.date = date;
     }
 
     public double getRent() {

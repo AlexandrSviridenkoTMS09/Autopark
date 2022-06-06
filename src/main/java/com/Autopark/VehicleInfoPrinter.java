@@ -32,26 +32,6 @@ public class VehicleInfoPrinter {
         System.out.println("maxTax = " + VehicleUtils.calculationMaxTax(vehicleTypes) + "\n" + "average = " + calculationAverage(vehicleTypes));
     }
 
-    public static void printlnSortedVehicleType(Vehicle[] vehicle) {
-        for (int i = 0; i < SIZE_VEHICLES; i++) {
-            for (int j = 0; j < SIZE_VEHICLES - 1; j++) {
-                if (vehicle[j].compareTo(vehicle[j + 1]) > 0) {
-
-                    Vehicle temp = vehicle[j + 1];
-                    vehicle[j + 1] = vehicle[j];
-                    vehicle[j] = temp;
-                }
-            }
-        }
-        System.out.println("\nSorted vehicles: ");
-        VehicleUtils.displayArr(vehicle);
-    }
-
-    public static void printUnsortedVehicleType(Vehicle[] vehicle) {
-        System.out.println("Unsorted vehicles: ");
-        displayArr(vehicle);
-    }
-
     public static void displayEqual(Vehicle[] vehicles) {
         int counter = 0;
         for (int i = 0; i < SIZE_VEHICLES; i++) {

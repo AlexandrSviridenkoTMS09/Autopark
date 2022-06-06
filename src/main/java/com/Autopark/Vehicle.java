@@ -34,51 +34,13 @@ public class Vehicle {
                    Color color
                    ) {
         this.id = id;
-        if (!validateVehicleType(type)) {
-            this.type = null;
-        } else {
-            this.type = type;
-        }
-        if (!validateModelName(modelName)) {
-            this.modelName = null;
-        } else {
-            this.modelName = modelName;
-        }
-        if (!validateRegistrationNumber(registrationNumber)) {
-            this.registrationNumber = null;
-        } else {
-            this.registrationNumber = registrationNumber;
-        }
-
-        if (validateWeight(weight)) {
-            if (validateWeight(weight)) {
-                this.weight = weight;
-            } else {
-                this.weight = 0;
-            }
-        }
-        if (validateManufactureYear(manufactureYear)) {
-            if (validateManufactureYear(manufactureYear)) {
-                this.manufactureYear = manufactureYear;
-            } else {
-                this.manufactureYear = 0;
-            }
-        }
-
-        if (validateMileage(mileage)) {
-            if (validateMileage(mileage)) {
-                this.mileage = mileage;
-            } else {
-                this.mileage = 0;
-            }
-        }
-        if (validateColor(color)) {
-            if (validateColor(color)) {
-                this.color = color;
-            } else {
-                this.color = null;
-            }
-        }
+        this.type = validateVehicleType(type)? type:null;
+        this.modelName = validateModelName(modelName)?modelName:null;
+        this.registrationNumber = validateRegistrationNumber(registrationNumber)?registrationNumber:null;
+        this.weight = validateWeight(weight)?weight:0;
+        this.manufactureYear = validateManufactureYear(manufactureYear)?manufactureYear:0;
+        this.mileage = validateMileage(mileage)?mileage:0;
+        this.color = validateColor(color)?color:null;
         this.engine = engine;
     }
 
