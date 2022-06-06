@@ -4,6 +4,8 @@ import com.Autopark.Engine.Startable;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import static com.Autopark.TechnicalSpecialist.*;
@@ -18,9 +20,20 @@ public class Vehicle {
     private Color color;
     private int volumeTank;
     private Startable engine;
+    private int id;
+    private List<Rent> rents = new ArrayList<>();
 
-    public Vehicle(VehicleType type, String modelName, String registrationNumber, int weight, int manufactureYear,
-                   int mileage, Color color, int volumeTank, Startable engine) {
+    public Vehicle(int id,
+                   VehicleType type,
+                   Startable engine,
+                   String modelName,
+                   String registrationNumber,
+                   int weight,
+                   int manufactureYear,
+                   int mileage,
+                   Color color
+                   ) {
+        this.id = id;
         if (!validateVehicleType(type)) {
             this.type = null;
         } else {
@@ -66,13 +79,42 @@ public class Vehicle {
                 this.color = null;
             }
         }
-        this.volumeTank = volumeTank;
         this.engine = engine;
     }
 
+    public List<Rent> getRents() {
+        return rents;
+    }
+
+    public void setRents(List<Rent> rents) {
+        this.rents = rents;
+    }
+
+    public double getTotalIncome() {
+        double sum = 0.0d;
+
+        for (Rent rent: rents) {
+            sum += rent.getRent();
+        }
+        return sum;
+    }
+
+
+    public double getTotalProfit() {
+        return getTotalIncome() - getCalcTaxPerMonth();
+    }
 
     public Vehicle() {
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
 
     public Startable getEngine() {
         return engine;
@@ -130,14 +172,6 @@ public class Vehicle {
         this.color = color;
     }
 
-    public int getVolumeTank() {
-        return volumeTank;
-    }
-
-    public void setVolumeTank(int volumeTank) {
-        this.volumeTank = volumeTank;
-    }
-
     public double getCalcTaxPerMonth() {
         VehicleType vehicleType = new VehicleType();
         double GetCalcTaxPerMonth = getWeight() * 0.0013 + vehicleType.taxCoefficient * engine.getTaxPerMonth() * 30 + 5;
@@ -147,7 +181,7 @@ public class Vehicle {
     @Override
     public String toString() {
         return type + "," + modelName + "," + registrationNumber + "," + weight + "," + manufactureYear + ","
-                + mileage + "," + color + "," + volumeTank + "," + getCalcTaxPerMonth();
+                + mileage + "," + color + "," /*+ volumeTank + ","*/ + getCalcTaxPerMonth();
 
     }
 

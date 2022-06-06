@@ -4,10 +4,20 @@ public class VehicleType {
 
     String typeName;
     double taxCoefficient;
+    int id;
 
-    public VehicleType(String typeName, double taxCoefficient) {
+    public VehicleType(String typeName, double taxCoefficient, int id) {
         this.typeName = typeName;
         this.taxCoefficient = taxCoefficient;
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public VehicleType() {
