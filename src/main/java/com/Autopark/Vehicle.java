@@ -32,16 +32,47 @@ public class Vehicle {
                    int manufactureYear,
                    int mileage,
                    Color color
-                   ) {
-        this.id = id;
-        this.type = validateVehicleType(type)? type:null;
-        this.modelName = validateModelName(modelName)?modelName:null;
-        this.registrationNumber = validateRegistrationNumber(registrationNumber)?registrationNumber:null;
-        this.weight = validateWeight(weight)?weight:0;
-        this.manufactureYear = validateManufactureYear(manufactureYear)?manufactureYear:0;
-        this.mileage = validateMileage(mileage)?mileage:0;
-        this.color = validateColor(color)?color:null;
-        this.engine = engine;
+    ) {
+        try {
+            this.id = id;
+            if (!validateVehicleType(type)) {
+                throw new NotVehicleException("Vehicle type: " + type);
+            }
+            this.type = type;
+
+            if (!validateModelName(modelName)) {
+                throw new NotVehicleException("Model name: " + modelName);
+            }
+            this.modelName = modelName;
+
+            if (!validateRegistrationNumber(registrationNumber)) {
+                throw new NotVehicleException("Registration number:" + registrationNumber);
+            }
+            this.registrationNumber = registrationNumber;
+
+            if (!validateWeight(weight)) {
+                throw new NotVehicleException("Weight: " + weight);
+            }
+            this.weight = weight;
+
+            if (!validateManufactureYear(manufactureYear)) {
+                throw new NotVehicleException("Manufacture year: " + manufactureYear);
+            }
+            this.manufactureYear = manufactureYear;
+
+            if (!validateMileage(mileage)) {
+                throw new NotVehicleException("Mileage: " + mileage);
+            }
+            this.mileage = mileage;
+
+            if (!validateColor(color)) {
+                throw new NotVehicleException("Color: " + color);
+            }
+            this.color = color;
+            this.engine = engine;
+        } catch (NotVehicleException e) {
+            System.err.println(e.getMessage());
+        }
     }
 
     public List<Rent> getRents() {
@@ -55,7 +86,7 @@ public class Vehicle {
     public double getTotalIncome() {
         double sum = 0.0d;
 
-        for (Rent rent: rents) {
+        for (Rent rent : rents) {
             sum += rent.getRent();
         }
         return sum;
