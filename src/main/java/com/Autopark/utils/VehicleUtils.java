@@ -1,6 +1,8 @@
 package com.Autopark.utils;
 
+import com.Autopark.MyQueue;
 import com.Autopark.Vehicle;
+import com.Autopark.VehicleCollection;
 import com.Autopark.VehicleType;
 
 
@@ -85,4 +87,18 @@ public class VehicleUtils {
     }
 
     public static final int SIZE_VEHICLES = 7;
+
+    public static void washVehicles(VehicleCollection vehCollection, MyQueue<Vehicle> queue) {
+        int size;
+
+        for (Vehicle vehicle : vehCollection.getVehicles()) {
+            queue.enqueue(vehicle);
+        }
+
+        size = queue.size();
+
+        for (int i = 0; i < size; i++) {
+            System.out.println(queue.dequeue() + " -- is washed up");
+        }
+    }
 }

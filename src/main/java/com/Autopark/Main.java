@@ -7,6 +7,8 @@ import com.Autopark.Engine.GasolineEngine;
 import java.util.Arrays;
 import java.util.Collections;
 
+import static com.Autopark.utils.VehicleUtils.washVehicles;
+
 public class Main {
 
     public static final String TYPES_PATH = "src/main/java/com/Autopark/File.csv/types.csv";
@@ -18,12 +20,10 @@ public class Main {
         VehicleCollection vehCollection = new VehicleCollection(TYPES_PATH, VEHICLES_PATH, RENTS_PATH);
         vehCollection.display();
 
-        vehCollection.insert(new Vehicle(8, vehCollection.getVehicleTypes().get(2), new DieselEngine(1.6, 7.2, 55), "Opel", "6427 AA-7", 2500, 1990, 345200, Color.BLACK));
-        vehCollection.delete(1);
-        vehCollection.delete(4);
-        vehCollection.display();
-
         vehCollection.sortCollection();
         vehCollection.display();
+
+        MyQueue<Vehicle> queue = new MyQueue<>();
+        washVehicles(vehCollection, queue);
     }
 }
