@@ -20,6 +20,7 @@ public class Vehicle {
     private Color color;
     private int volumeTank;
     private Startable engine;
+
     private int id;
     private List<Rent> rents = new ArrayList<>();
 
@@ -39,6 +40,7 @@ public class Vehicle {
                 throw new NotVehicleException("Vehicle type: " + type);
             }
             this.type = type;
+
 
             if (!validateModelName(modelName)) {
                 throw new NotVehicleException("Model name: " + modelName);
@@ -69,8 +71,10 @@ public class Vehicle {
                 throw new NotVehicleException("Color: " + color);
             }
             this.color = color;
+
             this.engine = engine;
-        } catch (NotVehicleException e) {
+        }
+        catch (NotVehicleException e){
             System.err.println(e.getMessage());
         }
     }
@@ -108,7 +112,6 @@ public class Vehicle {
         this.id = id;
     }
 
-
     public Startable getEngine() {
         return engine;
     }
@@ -130,7 +133,9 @@ public class Vehicle {
     }
 
     public void setRegistrationNumber(String registrationNumber) {
-        this.registrationNumber = registrationNumber;
+        if (validateRegistrationNumber(registrationNumber)) {
+            this.registrationNumber = registrationNumber;
+        }
     }
 
     public int getWeight() {
@@ -138,15 +143,13 @@ public class Vehicle {
     }
 
     public void setWeight(int weight) {
-        this.weight = weight;
+        if (validateWeight(weight)) {
+            this.weight = weight;
+        }
     }
 
     public int getManufactureYear() {
         return manufactureYear;
-    }
-
-    public void setManufactureYear(int manufactureYear) {
-        this.manufactureYear = manufactureYear;
     }
 
     public int getMileage() {
@@ -154,7 +157,9 @@ public class Vehicle {
     }
 
     public void setMileage(int mileage) {
-        this.mileage = mileage;
+        if (validateMileage(mileage)) {
+            this.mileage = mileage;
+        }
     }
 
     public Color getColor() {
@@ -162,7 +167,9 @@ public class Vehicle {
     }
 
     public void setColor(Color color) {
-        this.color = color;
+        if (validateColor(color)) {
+            this.color = color;
+        }
     }
 
     public double getCalcTaxPerMonth() {

@@ -14,6 +14,7 @@ public class Main {
     public static final String RENTS_PATH = "src/main/java/com/Autopark/File.csv/rents.csv";
 
     public static void main(String[] args) {
+
         VehicleCollection vehCollection = new VehicleCollection(TYPES_PATH, VEHICLES_PATH, RENTS_PATH);
         vehCollection.display();
 
@@ -26,4 +27,3 @@ public class Main {
         vehCollection.display();
     }
 }
-
