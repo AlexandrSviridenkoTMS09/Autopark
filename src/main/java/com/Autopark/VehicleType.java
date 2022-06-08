@@ -2,9 +2,9 @@ package com.Autopark;
 
 public class VehicleType {
 
-    String typeName;
-    double taxCoefficient;
-    int id;
+   private String typeName;
+   private double taxCoefficient;
+   private int id;
 
     public VehicleType(String typeName, double taxCoefficient, int id) {
         this.typeName = typeName;

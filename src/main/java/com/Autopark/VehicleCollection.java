@@ -14,17 +14,14 @@ import java.util.*;
 import java.util.regex.Pattern;
 
 public class VehicleCollection {
-    private final String vehicleTypePath;
-    private final String vehiclePath;
-    private final String rentPath;
 
     private List<VehicleType> vehicleTypes;
     private List<Vehicle> vehicles;
 
     public VehicleCollection(String vehicleTypePath, String vehiclePath, String rentPath) {
-        this.vehicleTypePath = vehicleTypePath;
-        this.vehiclePath = vehiclePath;
-        this.rentPath = rentPath;
+        loadTypes(vehicleTypePath);
+        loadVehicles(vehiclePath);
+        loadRents(rentPath);
     }
 
     public List<Vehicle> getVehicles() {
@@ -38,7 +35,7 @@ public class VehicleCollection {
     public List<VehicleType> loadTypes(String inFile) {
 
         List<VehicleType> list = new ArrayList<>();
-        List<String> csvStrings = readFile(inFile + vehicleTypePath);
+        List<String> csvStrings = readFile(inFile);
 
         for (String csvString : csvStrings) {
             list.add(createType(csvString));
@@ -51,7 +48,7 @@ public class VehicleCollection {
     public List<Rent> loadRents(String inFile) {
 
         List<Rent> list = new ArrayList<>();
-        List<String> csvStrings = readFile(inFile + rentPath);
+        List<String> csvStrings = readFile(inFile);
 
         for (String csvString : csvStrings) {
             list.add(createRent(csvString));
@@ -62,7 +59,7 @@ public class VehicleCollection {
 
     public List<Vehicle> loadVehicles(String inFile) {
         List<Vehicle> list = new ArrayList<>();
-        List<String> csvStrings = readFile(inFile + vehiclePath);
+        List<String> csvStrings = readFile(inFile);
 
         for (String csvString : csvStrings) {
             list.add(createVehicle(csvString));
@@ -136,13 +133,12 @@ public class VehicleCollection {
         return new Vehicle(id, type, engine, modelName, registrationNumber, weight, manufactureYear, mileage, color);
     }
 
-    public void insert(int index, Vehicle v) {
-        if (index < vehicles.size() && index >= 0) {
-            vehicles.add(index, v);
-            return;
-        }
-
+    public void insert(Vehicle v) {
         vehicles.add(v);
+    }
+
+    public List<VehicleType> getVehicleTypes() {
+        return vehicleTypes;
     }
 
     public int delete(int index) {

@@ -135,8 +135,7 @@ public class Vehicle {
     }
 
     public double getCalcTaxPerMonth() {
-        VehicleType vehicleType = new VehicleType();
-        double GetCalcTaxPerMonth = getWeight() * 0.0013 + vehicleType.taxCoefficient * engine.getTaxPerMonth() * 30 + 5;
+        double GetCalcTaxPerMonth = getWeight() * 0.0013 + type.getTax() * engine.getTaxPerMonth() * 30 + 5;
         return new BigDecimal(GetCalcTaxPerMonth).setScale(2, RoundingMode.HALF_EVEN).doubleValue();
     }
 
