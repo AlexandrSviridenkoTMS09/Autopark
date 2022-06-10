@@ -4,6 +4,8 @@ import com.Autopark.Engine.Startable;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import static com.Autopark.TechnicalSpecialist.*;
@@ -19,18 +21,31 @@ public class Vehicle {
     private int volumeTank;
     private Startable engine;
 
-    public Vehicle(VehicleType type, String modelName, String registrationNumber, int weight, int manufactureYear,
-                   int mileage, Color color, int volumeTank, Startable engine) {
+    private int id;
+    private List<Rent> rents = new ArrayList<>();
+
+    public Vehicle(int id,
+                   VehicleType type,
+                   Startable engine,
+                   String modelName,
+                   String registrationNumber,
+                   int weight,
+                   int manufactureYear,
+                   int mileage,
+                   Color color
+    ) {
         try {
+            this.id = id;
             if (!validateVehicleType(type)) {
                 throw new NotVehicleException("Vehicle type: " + type);
             }
-                this.type = type;
+            this.type = type;
+
 
             if (!validateModelName(modelName)) {
                 throw new NotVehicleException("Model name: " + modelName);
             }
-                this.modelName = modelName;
+            this.modelName = modelName;
 
             if (!validateRegistrationNumber(registrationNumber)) {
                 throw new NotVehicleException("Registration number:" + registrationNumber);
@@ -47,7 +62,7 @@ public class Vehicle {
             }
             this.manufactureYear = manufactureYear;
 
-            if(!validateMileage(mileage)){
+            if (!validateMileage(mileage)) {
                 throw new NotVehicleException("Mileage: " + mileage);
             }
             this.mileage = mileage;
@@ -56,12 +71,45 @@ public class Vehicle {
                 throw new NotVehicleException("Color: " + color);
             }
             this.color = color;
+
+            this.engine = engine;
         }
         catch (NotVehicleException e){
             System.err.println(e.getMessage());
         }
-        this.volumeTank = volumeTank;
-        this.engine = engine;
+    }
+
+    public List<Rent> getRents() {
+        return rents;
+    }
+
+    public void setRents(List<Rent> rents) {
+        this.rents = rents;
+    }
+
+    public double getTotalIncome() {
+        double sum = 0.0d;
+
+        for (Rent rent : rents) {
+            sum += rent.getRent();
+        }
+        return sum;
+    }
+
+
+    public double getTotalProfit() {
+        return getTotalIncome() - getCalcTaxPerMonth();
+    }
+
+    public Vehicle() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public Startable getEngine() {
@@ -70,9 +118,6 @@ public class Vehicle {
 
     public void setEngine(Startable engine) {
         this.engine = engine;
-    }
-
-    public Vehicle() {
     }
 
     public VehicleType getType() {
@@ -127,24 +172,15 @@ public class Vehicle {
         }
     }
 
-    public int getVolumeTank() {
-        return volumeTank;
-    }
-
-    public void setVolumeTank(int volumeTank) {
-        this.volumeTank = volumeTank;
-    }
-
     public double getCalcTaxPerMonth() {
-        VehicleType vehicleType = new VehicleType();
-        double GetCalcTaxPerMonth = getWeight() * 0.0013 + vehicleType.taxCoefficient * engine.getTaxPerMonth() * 30 + 5;
+        double GetCalcTaxPerMonth = getWeight() * 0.0013 + type.getTax() * engine.getTaxPerMonth() * 30 + 5;
         return new BigDecimal(GetCalcTaxPerMonth).setScale(2, RoundingMode.HALF_EVEN).doubleValue();
     }
 
     @Override
     public String toString() {
         return type + "," + modelName + "," + registrationNumber + "," + weight + "," + manufactureYear + ","
-                + mileage + "," + color + "," + volumeTank + "," + getCalcTaxPerMonth();
+                + mileage + "," + color + "," /*+ volumeTank + ","*/ + getCalcTaxPerMonth();
 
     }
 

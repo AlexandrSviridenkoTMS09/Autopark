@@ -1,5 +1,10 @@
 package com.Autopark;
 
+import com.Autopark.Main.*;
+import com.Autopark.utils.VehicleUtils;
+
+import static com.Autopark.utils.VehicleUtils.*;
+
 public class VehicleInfoPrinter {
     public static final int SIZE_VEHICLES = 7;
 
@@ -17,34 +22,14 @@ public class VehicleInfoPrinter {
 
     public static void printlnMaxAndMinMileage(Vehicle[] vehicle) {
         System.out.println("\nMax mileage car: ");
-        System.out.println(Main.findMaxMileageVehicle(vehicle));
+        System.out.println(findMaxMileageVehicle(vehicle));
 
         System.out.println("\nMin mileage car: ");
-        System.out.println(Main.findMinMileageVehicle(vehicle));
+        System.out.println(findMinMileageVehicle(vehicle));
     }
 
     public static void printlnMaxTax(VehicleType[] vehicleTypes) {
-        System.out.println("maxTax = " + Main.calculationMaxTax(vehicleTypes) + "\n" + "average = " + Main.calculationAverage(vehicleTypes));
-    }
-
-    public static void printlnSortedVehicleType(Vehicle[] vehicle) {
-        for (int i = 0; i < SIZE_VEHICLES; i++) {
-            for (int j = 0; j < SIZE_VEHICLES - 1; j++) {
-                if (vehicle[j].compareTo(vehicle[j + 1]) > 0) {
-
-                    Vehicle temp = vehicle[j + 1];
-                    vehicle[j + 1] = vehicle[j];
-                    vehicle[j] = temp;
-                }
-            }
-        }
-        System.out.println("\nSorted vehicles: ");
-        Main.Helper.displayArr(vehicle);
-    }
-
-    public static void printUnsortedVehicleType(Vehicle[] vehicle) {
-        System.out.println("Unsorted vehicles: ");
-        Main.Helper.displayArr(vehicle);
+        System.out.println("maxTax = " + VehicleUtils.calculationMaxTax(vehicleTypes) + "\n" + "average = " + calculationAverage(vehicleTypes));
     }
 
     public static void displayEqual(Vehicle[] vehicles) {
@@ -62,6 +47,6 @@ public class VehicleInfoPrinter {
         }
     }
     public static void printAutoMaxKilometrs(Vehicle[] vehicles){
-        Main.autoMaxKilometrs(vehicles);
+        autoMaxKilometrs(vehicles);
     }
 }
