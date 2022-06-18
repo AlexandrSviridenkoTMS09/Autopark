@@ -1,7 +1,6 @@
 package com.Autopark.utils;
 
-import com.Autopark.Vehicle;
-import com.Autopark.VehicleType;
+import com.Autopark.*;
 
 
 public class VehicleUtils {
@@ -85,4 +84,34 @@ public class VehicleUtils {
     }
 
     public static final int SIZE_VEHICLES = 7;
+
+    public static void washVehicles(VehicleCollection vehCollection, MyQueue<Vehicle> queue) {
+        int size;
+
+        for (Vehicle vehicle : vehCollection.getVehicles()) {
+            queue.enqueue(vehicle);
+        }
+
+        size = queue.size();
+
+        for (int i = 0; i < size; i++) {
+            System.out.println(queue.dequeue() + " -- is washed up");
+        }
+    }
+
+    public static void goToTheGarage(VehicleCollection vehCollection, MyStack<Vehicle> stack) {
+        int size;
+
+        for (Vehicle vehicle : vehCollection.getVehicles()) {
+            stack.push(vehicle);
+            System.out.println(stack.peek() + " -- has driven in");
+        }
+
+        System.out.println("Garage is fulled\n");
+        size = stack.size();
+
+        for (int i = 0; i < size; i++) {
+            System.out.println(stack.pop() + " -- has driven out");
+        }
+    }
 }
