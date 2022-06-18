@@ -20,7 +20,6 @@ public class Vehicle {
     private Color color;
     private int volumeTank;
     private Startable engine;
-
     private int id;
     private List<Rent> rents = new ArrayList<>();
 
@@ -71,10 +70,8 @@ public class Vehicle {
                 throw new NotVehicleException("Color: " + color);
             }
             this.color = color;
-
             this.engine = engine;
-        }
-        catch (NotVehicleException e){
+        } catch (NotVehicleException e) {
             System.err.println(e.getMessage());
         }
     }
@@ -96,13 +93,11 @@ public class Vehicle {
         return sum;
     }
 
-
     public double getTotalProfit() {
         return getTotalIncome() - getCalcTaxPerMonth();
     }
 
-    public Vehicle() {
-    }
+    public Vehicle() {}
 
     public int getId() {
         return id;
@@ -184,7 +179,6 @@ public class Vehicle {
 
     }
 
-
     public int compareTo(Vehicle obj) {
         if (manufactureYear > obj.manufactureYear) {
             return 1;
@@ -199,7 +193,6 @@ public class Vehicle {
         }
         return 0;
     }
-
 
     @Override
     public boolean equals(Object o) {
