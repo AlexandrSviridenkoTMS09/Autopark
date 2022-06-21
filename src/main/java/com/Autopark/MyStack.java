@@ -4,7 +4,6 @@ import java.util.Arrays;
 
 public class MyStack<T> {
     private static final int DEFAULT_SIZE = 5;
-    private final int CLEAR_ARRAY_SIGNAL = 5;
     private Object[] array;
     private int size;
     private int current;
@@ -12,7 +11,7 @@ public class MyStack<T> {
     public MyStack() {
         array = new Object[DEFAULT_SIZE];
         size = DEFAULT_SIZE;
-        current = -1;
+        current = 0;
     }
 
     public void push(T obj) {
@@ -26,7 +25,7 @@ public class MyStack<T> {
 
     public T pop() {
         T element = peek();
-        current--;
+        --current;
 
         return element;
     }
@@ -40,7 +39,7 @@ public class MyStack<T> {
     }
 
     public int size() {
-        return current + 1;
+        return current;
     }
 
     public int getSize() {
