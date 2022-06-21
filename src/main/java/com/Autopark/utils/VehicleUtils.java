@@ -85,33 +85,39 @@ public class VehicleUtils {
 
     public static final int SIZE_VEHICLES = 7;
 
-    public static void washVehicles(VehicleCollection vehCollection, MyQueue<Vehicle> queue) {
-        int size;
-
+    public static void addCarInQueue(VehicleCollection vehCollection, MyQueue<Vehicle> queue) {
         for (Vehicle vehicle : vehCollection.getVehicles()) {
             queue.enqueue(vehicle);
         }
+    }
 
-        size = queue.size();
-
-        for (int i = 0; i < size; i++) {
-            System.out.println(queue.dequeue() + " -- is washed up");
+    public static void washVehicles(MyQueue<Vehicle> queue) {
+        for (int i = 0; i < queue.getSize(); i++) {
+            Vehicle vehicle = queue.dequeue();
+            if (vehicle == null) {
+                return;
+            }
+            System.out.println(vehicle + " -- is washed up");
         }
     }
 
-    public static void goToTheGarage(VehicleCollection vehCollection, MyStack<Vehicle> stack) {
-        int size;
-
+    public static void addCarInGarage(VehicleCollection vehCollection, MyStack<Vehicle> stack){
         for (Vehicle vehicle : vehCollection.getVehicles()) {
             stack.push(vehicle);
             System.out.println(stack.peek() + " -- has driven in");
         }
 
         System.out.println("Garage is fulled\n");
-        size = stack.size();
+    }
 
-        for (int i = 0; i < size; i++) {
-            System.out.println(stack.pop() + " -- has driven out");
+    public static void goToTheGarage(VehicleCollection vehCollection, MyStack<Vehicle> stack) {
+
+        for (int i = 0; i < stack.getSize(); i++) {
+            Vehicle vehicle = stack.pop();
+            if (vehicle == null) {
+                return;
+            }
+            System.out.println(vehicle + " -- has driven out");
         }
     }
 }

@@ -7,8 +7,7 @@ import com.Autopark.Engine.GasolineEngine;
 import java.util.Arrays;
 import java.util.Collections;
 
-import static com.Autopark.utils.VehicleUtils.goToTheGarage;
-import static com.Autopark.utils.VehicleUtils.washVehicles;
+import static com.Autopark.utils.VehicleUtils.*;
 
 public class Main {
 
@@ -24,12 +23,15 @@ public class Main {
         vehCollection.sortCollection();
         vehCollection.display();
 
+
         MyQueue<Vehicle> queue = new MyQueue<>();
-        washVehicles(vehCollection, queue);
+        addCarInQueue(vehCollection, queue);
+        washVehicles(queue);
 
         System.out.println();
 
         MyStack<Vehicle> stack = new MyStack<>();
+        addCarInGarage(vehCollection, stack);
         goToTheGarage(vehCollection, stack);
     }
 }

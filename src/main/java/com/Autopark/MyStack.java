@@ -17,7 +17,8 @@ public class MyStack<T> {
 
     public void push(T obj) {
         if (current == size - 1) {
-            array = Arrays.copyOf(array, size * 2);
+            size *= 2;
+            array = Arrays.copyOf(array, size);
         }
 
         array[++current] = obj;
@@ -42,4 +43,7 @@ public class MyStack<T> {
         return current + 1;
     }
 
+    public int getSize() {
+        return size;
+    }
 }
