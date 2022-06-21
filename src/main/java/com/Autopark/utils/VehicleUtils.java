@@ -88,17 +88,19 @@ public class VehicleUtils {
 
     public static final int SIZE_VEHICLES = 7;
 
-    public static void washVehicles(VehicleCollection vehCollection, MyQueue<Vehicle> queue) {
-        int size;
-
+    public static void addCarInQueue(VehicleCollection vehCollection, MyQueue<Vehicle> queue) {
         for (Vehicle vehicle : vehCollection.getVehicles()) {
             queue.enqueue(vehicle);
         }
+    }
 
-        size = queue.size();
-
-        for (int i = 0; i < size; i++) {
-            System.out.println(queue.dequeue() + " -- is washed up");
+    public static void washVehicles(MyQueue<Vehicle> queue) {
+        for (int i = 0; i < queue.getSize(); i++) {
+            Vehicle vehicle = queue.dequeue();
+            if (vehicle == null) {
+                return;
+            }
+            System.out.println(vehicle + " -- is washed up");
         }
     }
 }

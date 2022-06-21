@@ -7,7 +7,7 @@ import com.Autopark.Engine.GasolineEngine;
 import java.util.Arrays;
 import java.util.Collections;
 
-import static com.Autopark.utils.VehicleUtils.washVehicles;
+import static com.Autopark.utils.VehicleUtils.*;
 
 public class Main {
 
@@ -24,6 +24,7 @@ public class Main {
         vehCollection.display();
 
         MyQueue<Vehicle> queue = new MyQueue<>();
-        washVehicles(vehCollection, queue);
+        addCarInQueue(vehCollection, queue);
+        washVehicles(queue);
     }
 }

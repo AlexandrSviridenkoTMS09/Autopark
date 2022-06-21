@@ -1,6 +1,9 @@
 package com.Autopark;
 
 import java.util.Arrays;
+import java.util.Iterator;
+import java.util.Spliterator;
+import java.util.function.Consumer;
 
 public class MyQueue<T> {
     private static final int DEFAULT_SIZE = 5;
@@ -12,16 +15,17 @@ public class MyQueue<T> {
     public MyQueue() {
         array = new Object[DEFAULT_SIZE];
         size = DEFAULT_SIZE;
-        last = -1;
+        last = 0;
         first = 0;
     }
 
     public void enqueue(T obj) {
         if (last == size - 1) {
-            array = Arrays.copyOf(array, size * 2);
+            size *= 2;
+            array = Arrays.copyOf(array, size);
         }
 
-        array[++last] = obj;
+        array[last++] = obj;
     }
 
     public T dequeue() {
@@ -40,6 +44,10 @@ public class MyQueue<T> {
     }
 
     public int size() {
-        return last - first + 1;
+        return last - first;
+    }
+
+    public int getSize() {
+        return size;
     }
 }
