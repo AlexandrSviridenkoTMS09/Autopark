@@ -107,7 +107,7 @@ public class VehicleUtils {
             System.out.println(stack.peek() + " -- has driven in");
         }
 
-        System.out.println("Garage is fulled\n");
+        System.out.println("Garage is full\n");
     }
 
     public static void goToTheGarage(VehicleCollection vehCollection, MyStack<Vehicle> stack) {
