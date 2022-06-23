@@ -26,5 +26,9 @@ public class Main {
         MyQueue<Vehicle> queue = new MyQueue<>();
         addCarInQueue(vehCollection, queue);
         washVehicles(queue);
+
+        MyStack<Vehicle> stack = new MyStack<>();
+        addCarInGarage(vehCollection, stack);
+        goToTheGarage(vehCollection, stack);
     }
 }

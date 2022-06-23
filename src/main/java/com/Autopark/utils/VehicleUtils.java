@@ -1,9 +1,6 @@
 package com.Autopark.utils;
 
-import com.Autopark.MyQueue;
-import com.Autopark.Vehicle;
-import com.Autopark.VehicleCollection;
-import com.Autopark.VehicleType;
+import com.Autopark.*;
 
 
 public class VehicleUtils {
@@ -103,4 +100,25 @@ public class VehicleUtils {
             System.out.println(vehicle + " -- is washed up");
         }
     }
+
+    public static void addCarInGarage(VehicleCollection vehCollection, MyStack<Vehicle> stack){
+        for (Vehicle vehicle : vehCollection.getVehicles()) {
+            stack.push(vehicle);
+            System.out.println(stack.peek() + " -- has driven in");
+        }
+
+        System.out.println("Garage is full\n");
+    }
+
+    public static void goToTheGarage(VehicleCollection vehCollection, MyStack<Vehicle> stack) {
+
+        for (int i = 0; i < stack.getSize(); i++) {
+            Vehicle vehicle = stack.pop();
+            if (vehicle == null) {
+                return;
+            }
+            System.out.println(vehicle + " -- has driven out");
+        }
+    }
+
 }
