@@ -28,7 +28,7 @@ public class VehicleCollection {
         return vehicles;
     }
 
-    public void sortCollection(){
+    public void sortCollection() {
         Collections.sort(getVehicles(), new VehicleComparator());
     }
 
@@ -99,7 +99,7 @@ public class VehicleCollection {
             throw new IllegalArgumentException(e);
         }
 
-        getVehicleById(id).getRents().add(new Rent(date ,cost));
+        getVehicleById(id).getRents().add(new Rent(date, cost));
 
         return new Rent(date, cost);
     }
@@ -114,6 +114,7 @@ public class VehicleCollection {
         int manufactureYear;
         int mileage;
         Color color;
+        boolean broken;
 
         String[] params = parseLine(csvString);
 
@@ -129,7 +130,6 @@ public class VehicleCollection {
         VehicleType type = getTypeById(typeId);
 
         engine = createEngine(params, 8);
-
         return new Vehicle(id, type, engine, modelName, registrationNumber, weight, manufactureYear, mileage, color);
     }
 
@@ -161,7 +161,7 @@ public class VehicleCollection {
     }
 
     public void display() {
-        String indentsTop  = "%5s %10s %20s %10s %11s %6s %8s %7s %9s %10s %9s";
+        String indentsTop = "%5s %10s %20s %10s %11s %6s %8s %7s %9s %10s %9s";
         String indentsLine = "%5d %10s %20s %10s %11d %6d %8d %7s %9.2f %10.2f %10.2f";
         String indentsBottom = "%5s %102.2f";
         String idStr = "Id";
@@ -182,19 +182,19 @@ public class VehicleCollection {
 
         System.out.println(top);
         for (Vehicle vehicle : vehicles) {
-            int    id        = vehicle.getId();
-            String type      = vehicle.getType().getName();
+            int id = vehicle.getId();
+            String type = vehicle.getType().getName();
             String modelName = vehicle.getModelName();
-            String number    = vehicle.getRegistrationNumber();
-            int    weight    = vehicle.getWeight();
-            int    year      = vehicle.getManufactureYear();
-            int    mileage   = vehicle.getMileage();
-            String color     = vehicle.getColor().toString();
-            double income    = vehicle.getTotalIncome();
-            double tax       = vehicle.getCalcTaxPerMonth();
-            double profit    = vehicle.getTotalProfit();
+            String number = vehicle.getRegistrationNumber();
+            int weight = vehicle.getWeight();
+            int year = vehicle.getManufactureYear();
+            int mileage = vehicle.getMileage();
+            String color = vehicle.getColor().toString();
+            double income = vehicle.getTotalIncome();
+            double tax = vehicle.getCalcTaxPerMonth();
+            double profit = vehicle.getTotalProfit();
 
-            String line      = String.format(indentsLine,id, type,
+            String line = String.format(indentsLine, id, type,
                     modelName, number, weight, year, mileage,
                     color, income, tax, profit);
 
@@ -210,7 +210,7 @@ public class VehicleCollection {
         List<String> csvStrings = new ArrayList<>();
         File file = new File(inFile);
 
-        try (Scanner in = new Scanner(file)){
+        try (Scanner in = new Scanner(file)) {
             while (in.hasNext()) {
                 csvStrings.add(in.nextLine());
             }
@@ -259,23 +259,21 @@ public class VehicleCollection {
         if (engineStr.equalsIgnoreCase("Electrical")) {
 
             double batterySize = Double.parseDouble(params[order + 1]);
-            double consumption = Double.parseDouble( params[order + 2]);
+            double consumption = Double.parseDouble(params[order + 2]);
 
             return new ElectricalEngine(batterySize, consumption);
-        }
-        else if (engineStr.equalsIgnoreCase("Diesel")) {
+        } else if (engineStr.equalsIgnoreCase("Diesel")) {
 
             double engineCapacity = Double.parseDouble(params[order + 1]);
-            double fuelConsumptionPer100 = Double.parseDouble( params[order + 2]);
-            double fuelTankCapacity = Double.parseDouble( params[order + 3]);
+            double fuelConsumptionPer100 = Double.parseDouble(params[order + 2]);
+            double fuelTankCapacity = Double.parseDouble(params[order + 3]);
 
             return new DieselEngine(engineCapacity, fuelConsumptionPer100, fuelTankCapacity);
-        }
-        else if (engineStr.equalsIgnoreCase("Gasoline")) {
+        } else if (engineStr.equalsIgnoreCase("Gasoline")) {
 
             double engineCapacity = Double.parseDouble(params[order + 1]);
-            double fuelConsumptionPer100 = Double.parseDouble( params[order + 2]);
-            double fuelTankCapacity = Double.parseDouble( params[order + 3]);
+            double fuelConsumptionPer100 = Double.parseDouble(params[order + 2]);
+            double fuelTankCapacity = Double.parseDouble(params[order + 3]);
 
             return new GasolineEngine(engineCapacity, fuelConsumptionPer100, fuelTankCapacity);
         }
