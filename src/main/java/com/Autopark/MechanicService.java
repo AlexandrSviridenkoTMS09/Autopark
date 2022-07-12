@@ -46,6 +46,23 @@ public class MechanicService implements Fixer {
     @Override
     public void repair(Vehicle vehicle) {
         List<String> result = new ArrayList<>();
+        int counter = 0;
+        counter = counter(vehicle);
+        counterMoreNull(vehicle, counter);
+        write(vehicle, result);
+        counterEqualNull(vehicle, counter);
+    }
+
+    @Override
+    public boolean isBroken(Vehicle vehicle) {
+        if (vehicle.getBroken()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static int counter(Vehicle vehicle) {
         String[] details = vehicle.getBrokenParts().split(",");
         details[details.length - 1] = details[details.length - 1].replace("\n", "");
         int counter = 0;
@@ -55,36 +72,39 @@ public class MechanicService implements Fixer {
                 counter++;
             }
         }
+        return counter;
+    }
+
+    public static void counterMoreNull(Vehicle vehicle, int counter) {
         if (counter > 0) {
             System.out.println("Vehicle '" + vehicle.getModelName() + "' was fixed");
             vehicle.setBroken(false);
-            try {
-                File writer = new File("C:/Users/Александр/IdeaProjects/Autopark/src/main/java/com/Autopark/File.csv/orders.csv");
-                FileWriter file = new FileWriter(writer, false);
-                Scanner scanner = new Scanner(writer);
-                while (scanner.hasNextLine()) {
-                    String str = scanner.nextLine();
-                    if (vehicle.getId() != Integer.parseInt(str.substring(0))) {
-                        result.add(str + "\n");
-                    }
-                }
-                for (String s : result) {
-                    file.write(s);
-                }
-                file.flush();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
-        if (counter == 0) System.out.println("Vehicle is healthy");
     }
 
-    @Override
-    public boolean isBroken(Vehicle vehicle) {
-        if (vehicle.getBroken()) {
-            return true;
-        } else {
-            return false;
+    public static void counterEqualNull(Vehicle vehicle, int counter) {
+        if (counter == 0) {
+            System.out.println("Vehicle is healthy");
+        }
+    }
+
+    public static void write(Vehicle vehicle, List<String> result) {
+        try {
+            File writer = new File("C:/Users/Александр/IdeaProjects/Autopark/src/main/java/com/Autopark/File.csv/orders.csv");
+            FileWriter file = new FileWriter(writer, false);
+            Scanner scanner = new Scanner(writer);
+            while (scanner.hasNextLine()) {
+                String str = scanner.nextLine();
+                if (vehicle.getId() != Integer.parseInt(str.substring(0))) {
+                    result.add(str + "\n");
+                }
+            }
+            for (String s : result) {
+                file.write(s);
+            }
+            file.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

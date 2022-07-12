@@ -3,8 +3,6 @@ package com.Autopark.utils;
 import com.Autopark.*;
 import com.Autopark.Exception.DefectedVehicleException;
 
-import java.util.Map;
-
 
 public class VehicleUtils {
     public static void changeTaxCoefficient(VehicleType[] as) {
@@ -151,6 +149,12 @@ public class VehicleUtils {
     }
 
     public static void printMaxCarBroken(VehicleCollection vehCollection) {
+        int maxSum = 0;
+        maxSum = findMaxSumBroken(vehCollection);
+        System.out.println(findMaxCarBroken(vehCollection, maxSum));
+    }
+
+    public static int findMaxSumBroken(VehicleCollection vehCollection) {
         MechanicService mechanicService = new MechanicService();
         int maxSum = 0;
         for (Vehicle vehicle : vehCollection.getVehicles()) {
@@ -158,11 +162,17 @@ public class VehicleUtils {
                 maxSum = vehicle.getSumOfBrokenParts();
             }
         }
+        return maxSum;
+    }
+
+    public static Object findMaxCarBroken(VehicleCollection vehCollection, int maxSum) {
+        MechanicService mechanicService = new MechanicService();
         for (Vehicle vehicle : vehCollection.getVehicles()) {
             if (maxSum == vehicle.getSumOfBrokenParts()) {
-                System.out.println(vehicle);
+                return vehicle;
             }
         }
+        return null;
     }
 
     public static void giveInRent(VehicleCollection vehCollection) {
