@@ -18,7 +18,8 @@ public class MechanicService implements Fixer {
     @Override
     public Map<String, Integer> detectBreaking(Vehicle vehicle) {
         Map<String, Integer> result = new HashMap<>();
-        createRandomBrokenDetails(vehicle, result);
+        int sum = createRandomBrokenDetailsAndReturnSum(vehicle, result);
+        vehicle.setSumOfBrokenParts(sum);
         writeInFileBrokenDetails(vehicle, result);
         return result;
     }
@@ -42,16 +43,20 @@ public class MechanicService implements Fixer {
         }
     }
 
-    public static Map createRandomBrokenDetails(Vehicle vehicle, Map<String, Integer> result) {
+    public static int createRandomBrokenDetailsAndReturnSum(Vehicle vehicle, Map<String, Integer> result) {
         int sum = 0;
         for (String s : details) {
             int randomNumber = (int) (Math.random() * 2);
             result.put(s, randomNumber);
-            sum += randomNumber;
+            calculateSumBrokenDetails(randomNumber, sum);
             if (randomNumber > 0) vehicle.setBroken(true);
         }
-        vehicle.setSumOfBrokenParts(sum);
-        return result;
+        return sum;
+    }
+
+    public static int calculateSumBrokenDetails(int randomNumber, int sum) {
+        sum += randomNumber;
+        return sum;
     }
 
     public static Map writeInFileBrokenDetails(Vehicle vehicle, Map<String, Integer> result) {
