@@ -18,6 +18,31 @@ public class MechanicService implements Fixer {
     @Override
     public Map<String, Integer> detectBreaking(Vehicle vehicle) {
         Map<String, Integer> result = new HashMap<>();
+        createRandomBrokenDetails(vehicle, result);
+        writeInFileBrokenDetails(vehicle, result);
+        return result;
+    }
+
+    @Override
+    public void repair(Vehicle vehicle) {
+        List<String> result = new ArrayList<>();
+        int counter = 0;
+        counter = counter(vehicle);
+        counterMoreNull(vehicle, counter);
+        writeInFileRemainingBreaking(vehicle, result);
+        counterEqualNull(vehicle, counter);
+    }
+
+    @Override
+    public boolean isBroken(Vehicle vehicle) {
+        if (vehicle.getBroken()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static Map createRandomBrokenDetails(Vehicle vehicle, Map<String, Integer> result) {
         int sum = 0;
         for (String s : details) {
             int randomNumber = (int) (Math.random() * 2);
@@ -26,6 +51,10 @@ public class MechanicService implements Fixer {
             if (randomNumber > 0) vehicle.setBroken(true);
         }
         vehicle.setSumOfBrokenParts(sum);
+        return result;
+    }
+
+    public static Map writeInFileBrokenDetails(Vehicle vehicle, Map<String, Integer> result) {
         try {
             FileWriter fileWriter = new FileWriter("C:/Users/Александр/IdeaProjects/Autopark/src/main/java/com/Autopark/File.csv/orders.csv", true);
             StringBuilder details = new StringBuilder();
@@ -41,25 +70,6 @@ public class MechanicService implements Fixer {
             e.printStackTrace();
         }
         return result;
-    }
-
-    @Override
-    public void repair(Vehicle vehicle) {
-        List<String> result = new ArrayList<>();
-        int counter = 0;
-        counter = counter(vehicle);
-        counterMoreNull(vehicle, counter);
-        write(vehicle, result);
-        counterEqualNull(vehicle, counter);
-    }
-
-    @Override
-    public boolean isBroken(Vehicle vehicle) {
-        if (vehicle.getBroken()) {
-            return true;
-        } else {
-            return false;
-        }
     }
 
     public static int counter(Vehicle vehicle) {
@@ -88,7 +98,7 @@ public class MechanicService implements Fixer {
         }
     }
 
-    public static void write(Vehicle vehicle, List<String> result) {
+    public static void writeInFileRemainingBreaking(Vehicle vehicle, List<String> result) {
         try {
             File writer = new File("C:/Users/Александр/IdeaProjects/Autopark/src/main/java/com/Autopark/File.csv/orders.csv");
             FileWriter file = new FileWriter(writer, false);
