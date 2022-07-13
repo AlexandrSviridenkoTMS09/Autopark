@@ -48,7 +48,7 @@ public class MechanicService implements Fixer {
         for (String s : details) {
             int randomNumber = (int) (Math.random() * 2);
             result.put(s, randomNumber);
-            calculateSumBrokenDetails(randomNumber, sum);
+            sum = calculateSumBrokenDetails(randomNumber, sum);
             if (randomNumber > 0) vehicle.setBroken(true);
         }
         return sum;
