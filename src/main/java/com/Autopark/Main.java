@@ -32,9 +32,10 @@ public class Main {
         goToTheGarage(vehCollection, stack);
 
         goInMechanicService(vehCollection);
+        printMaxCarBroken(vehCollection);
         CarTroubleshootingAndRepair(vehCollection);
         printServiceableCars(vehCollection);
         giveInRent(vehCollection);
-        printMaxCarBroken(vehCollection);
+
     }
 }
