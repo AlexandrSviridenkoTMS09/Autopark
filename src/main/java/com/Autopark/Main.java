@@ -30,5 +30,11 @@ public class Main {
         MyStack<Vehicle> stack = new MyStack<>();
         addCarInGarage(vehCollection, stack);
         goToTheGarage(vehCollection, stack);
+
+        goInMechanicService(vehCollection);
+        CarTroubleshootingAndRepair(vehCollection);
+        printServiceableCars(vehCollection);
+        giveInRent(vehCollection);
+        printMaxCarBroken(vehCollection);
     }
 }

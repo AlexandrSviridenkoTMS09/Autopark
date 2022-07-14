@@ -1,6 +1,7 @@
 package com.Autopark.utils;
 
 import com.Autopark.*;
+import com.Autopark.Exception.DefectedVehicleException;
 
 
 public class VehicleUtils {
@@ -101,15 +102,6 @@ public class VehicleUtils {
         }
     }
 
-    public static void addCarInGarage(VehicleCollection vehCollection, MyStack<Vehicle> stack){
-        for (Vehicle vehicle : vehCollection.getVehicles()) {
-            stack.push(vehicle);
-            System.out.println(stack.peek() + " -- has driven in");
-        }
-
-        System.out.println("Garage is full\n");
-    }
-
     public static void goToTheGarage(VehicleCollection vehCollection, MyStack<Vehicle> stack) {
 
         for (int i = 0; i < stack.getSize(); i++) {
@@ -121,4 +113,80 @@ public class VehicleUtils {
         }
     }
 
+    public static void addCarInGarage(VehicleCollection vehCollection, MyStack<Vehicle> stack) {
+        for (Vehicle vehicle : vehCollection.getVehicles()) {
+            stack.push(vehicle);
+            System.out.println(stack.peek() + " -- has driven in");
+        }
+
+        System.out.println("Garage is full\n");
+    }
+
+    public static void goInMechanicService(VehicleCollection vehCollection) {
+        MechanicService mechanicService = new MechanicService();
+        for (Vehicle vehicle : vehCollection.getVehicles()) {
+            System.out.println(mechanicService.detectBreaking(vehicle));
+        }
+    }
+
+    public static void CarTroubleshootingAndRepair(VehicleCollection vehCollection) {
+        MechanicService mechanicService = new MechanicService();
+        for (Vehicle vehicle : vehCollection.getVehicles()) {
+            if (mechanicService.detectAndRepair(vehicle)) {
+                System.out.println(vehicle.getModelName() + " was repair ");
+            } else {
+                System.out.println(vehicle.getModelName() + " don't have breaking ");
+            }
+        }
+    }
+
+    public static void printServiceableCars(VehicleCollection vehCollection) {
+        MechanicService mechanicService = new MechanicService();
+        for (Vehicle vehicle : vehCollection.getVehicles()) {
+            if (!(mechanicService.isBroken(vehicle)))
+                System.out.println(vehicle);
+        }
+    }
+
+    public static void printMaxCarBroken(VehicleCollection vehCollection) {
+        int maxSum = 0;
+        maxSum = findMaxSumBroken(vehCollection);
+        System.out.println(findMaxCarBroken(vehCollection, maxSum));
+    }
+
+    public static int findMaxSumBroken(VehicleCollection vehCollection) {
+        MechanicService mechanicService = new MechanicService();
+        int maxSum = 0;
+        for (Vehicle vehicle : vehCollection.getVehicles()) {
+            if (maxSum < vehicle.getSumOfBrokenParts()) {
+                maxSum = vehicle.getSumOfBrokenParts();
+            }
+        }
+        return maxSum;
+    }
+
+    public static Object findMaxCarBroken(VehicleCollection vehCollection, int maxSum) {
+        MechanicService mechanicService = new MechanicService();
+        for (Vehicle vehicle : vehCollection.getVehicles()) {
+            if (maxSum == vehicle.getSumOfBrokenParts()) {
+                return vehicle;
+            }
+        }
+        return null;
+    }
+
+    public static void giveInRent(VehicleCollection vehCollection) {
+        MechanicService mechanicService = new MechanicService();
+        for (Vehicle vehicle : vehCollection.getVehicles()) {
+            if (!(mechanicService.isBroken(vehicle))) {
+                System.out.println("You can give in rent this car: " + vehicle.getModelName());
+            } else {
+                try {
+                    throw new DefectedVehicleException("Sorry, this car:" + vehicle.getModelName() + " is broken");
+                } catch (DefectedVehicleException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 }

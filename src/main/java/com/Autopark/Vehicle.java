@@ -1,6 +1,7 @@
 package com.Autopark;
 
 import com.Autopark.Engine.Startable;
+import com.Autopark.Exception.NotVehicleException;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -22,6 +23,9 @@ public class Vehicle {
     private Startable engine;
     private int id;
     private List<Rent> rents = new ArrayList<>();
+    private boolean broken;
+    private String brokenParts;
+    private int sumOfBrokenParts;
 
     public Vehicle(int id,
                    VehicleType type,
@@ -31,7 +35,10 @@ public class Vehicle {
                    int weight,
                    int manufactureYear,
                    int mileage,
-                   Color color
+                   Color color,
+                   boolean broken,
+                   String brokenParts,
+                   int sumOfBrokenParts
     ) {
         try {
             this.id = id;
@@ -71,9 +78,25 @@ public class Vehicle {
             }
             this.color = color;
             this.engine = engine;
+            this.broken = broken;
+            this.brokenParts = brokenParts;
+            this.sumOfBrokenParts = sumOfBrokenParts;
         } catch (NotVehicleException e) {
             System.err.println(e.getMessage());
         }
+    }
+
+    public Vehicle(int id, VehicleType type, Startable engine, String modelName, String registrationNumber, int weight,
+                   int manufactureYear, int mileage, Color color) {
+        this.id = id;
+        this.type = type;
+        this.engine = engine;
+        this.modelName = modelName;
+        this.registrationNumber = registrationNumber;
+        this.weight = weight;
+        this.manufactureYear = manufactureYear;
+        this.mileage = mileage;
+        this.color = color;
     }
 
     public List<Rent> getRents() {
@@ -97,7 +120,8 @@ public class Vehicle {
         return getTotalIncome() - getCalcTaxPerMonth();
     }
 
-    public Vehicle() {}
+    public Vehicle() {
+    }
 
     public int getId() {
         return id;
@@ -205,6 +229,30 @@ public class Vehicle {
     @Override
     public int hashCode() {
         return Objects.hash(type, modelName);
+    }
+
+    public void setBroken(boolean b) {
+        this.broken = b;
+    }
+
+    public boolean getBroken() {
+        return broken;
+    }
+
+    public void setSumOfBrokenParts(int sum) {
+        this.sumOfBrokenParts = sum;
+    }
+
+    public int getSumOfBrokenParts() {
+        return sumOfBrokenParts;
+    }
+
+    public String getBrokenParts() {
+        return brokenParts;
+    }
+
+    public void setBrokenParts(String substring) {
+        this.brokenParts = substring;
     }
 }
 
