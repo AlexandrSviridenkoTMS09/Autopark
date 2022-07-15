@@ -3,6 +3,7 @@ package com.Autopark;
 import com.Autopark.Engine.DieselEngine;
 import com.Autopark.Engine.ElectricalEngine;
 import com.Autopark.Engine.GasolineEngine;
+import com.Autopark.utils.VehicleUtils;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -21,24 +22,24 @@ public class Main {
     public static void main(String[] args) {
 
         VehicleCollection vehCollection = new VehicleCollection(TYPES_PATH, VEHICLES_PATH, RENTS_PATH);
-//        vehCollection.display();
-//
-//        vehCollection.sortCollection();
-//        vehCollection.display();
-//
-//        MyQueue<Vehicle> queue = new MyQueue<>();
-//        addCarInQueue(vehCollection, queue);
-//        washVehicles(queue);
-//
-//        MyStack<Vehicle> stack = new MyStack<>();
-//        addCarInGarage(vehCollection, stack);
-//        goToTheGarage(vehCollection, stack);
-//
-//        goInMechanicService(vehCollection);
-//        CarTroubleshootingAndRepair(vehCollection);
-//        printServiceableCars(vehCollection);
-//        giveInRent(vehCollection);
-//        printMaxCarBroken(vehCollection);
+        vehCollection.display();
+
+        vehCollection.sortCollection();
+        vehCollection.display();
+
+        MyQueue<Vehicle> queue = new MyQueue<>();
+        addCarInQueue(vehCollection, queue);
+        washVehiclesQueue(queue);
+
+        MyStack<Vehicle> stack = new MyStack<>();
+        addCarInGarage(vehCollection, stack);
+        goToTheGarage(vehCollection, stack);
+
+        goInMechanicService(vehCollection);
+        CarTroubleshootingAndRepair(vehCollection);
+        printServiceableCars(vehCollection);
+        giveInRent(vehCollection);
+        printMaxCarBroken(vehCollection);
 
 
         List<Vehicle> vehicles = vehCollection.getVehicles();
@@ -58,11 +59,11 @@ public class Main {
         printCarWithMaxTax(max);
 
         List<Vehicle> listBroken = vehCollection.getVehicles().stream()
-                .peek((vehicle) -> goInMechanicService(vehicle))
+                .peek(VehicleUtils::goInMechanicService)
                 .collect(Collectors.toList());
 
         List<Vehicle> carTroubleshootingAndRepair = vehCollection.getVehicles().stream()
-                .peek((vehicle) -> CarTroubleshootingAndRepair(vehicle))
+                .peek(VehicleUtils::CarTroubleshootingAndRepair)
                 .collect(Collectors.toList());
         printVehicles(carTroubleshootingAndRepair, "Service:");
 

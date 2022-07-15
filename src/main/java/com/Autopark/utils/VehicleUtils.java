@@ -92,7 +92,7 @@ public class VehicleUtils {
         }
     }
 
-    public static void washVehicles(MyQueue<Vehicle> queue) {
+    public static void washVehiclesQueue(MyQueue<Vehicle> queue) {
         for (int i = 0; i < queue.getSize(); i++) {
             Vehicle vehicle = queue.dequeue();
             if (vehicle == null) {
