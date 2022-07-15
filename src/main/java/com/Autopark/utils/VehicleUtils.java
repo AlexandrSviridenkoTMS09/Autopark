@@ -129,6 +129,11 @@ public class VehicleUtils {
         }
     }
 
+    public static void goInMechanicService(Vehicle vehicle) {
+        MechanicService mechanicService = new MechanicService();
+        System.out.println(mechanicService.detectBreaking(vehicle));
+    }
+
     public static void CarTroubleshootingAndRepair(VehicleCollection vehCollection) {
         MechanicService mechanicService = new MechanicService();
         for (Vehicle vehicle : vehCollection.getVehicles()) {
@@ -140,12 +145,27 @@ public class VehicleUtils {
         }
     }
 
+    public static void CarTroubleshootingAndRepair(Vehicle vehicle) {
+        MechanicService mechanicService = new MechanicService();
+            if (mechanicService.detectAndRepair(vehicle)) {
+                System.out.println(vehicle.getModelName() + " was repair ");
+            } else {
+                System.out.println(vehicle.getModelName() + " don't have breaking ");
+            }
+    }
+
     public static void printServiceableCars(VehicleCollection vehCollection) {
         MechanicService mechanicService = new MechanicService();
         for (Vehicle vehicle : vehCollection.getVehicles()) {
             if (!(mechanicService.isBroken(vehicle)))
                 System.out.println(vehicle);
         }
+    }
+
+    public static void printServiceableCars(Vehicle vehicle) {
+        MechanicService mechanicService = new MechanicService();
+            if (!(mechanicService.isBroken(vehicle)))
+                System.out.println(vehicle);
     }
 
     public static void printMaxCarBroken(VehicleCollection vehCollection) {

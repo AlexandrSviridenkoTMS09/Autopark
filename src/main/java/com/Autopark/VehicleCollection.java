@@ -24,6 +24,10 @@ public class VehicleCollection {
         loadRents(rentPath);
     }
 
+    public VehicleCollection() {
+
+    }
+
     public List<Vehicle> getVehicles() {
         return vehicles;
     }
